@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.drools.facts</groupId>
+	<artifactId>drools-demo-facts-KJar</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>kjar</packaging>
+
+
+	<properties>
+		<kie.version>7.2.0.Final</kie.version>
+		<cucumber.version>1.2.5</cucumber.version>
+		<codehaus.jackson.version>1.9.13</codehaus.jackson.version>
+		<javaassist.version>3.19.0-GA</javaassist.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.kie</groupId>
+				<artifactId>kie-maven-plugin</artifactId>
+				<version>${kie.version}</version>
+				<extensions>true</extensions>
+			</plugin>
+		</plugins>
+		<!-- This pluginManagement is used to fix the following Eclipse error: -->
+		<!-- Plugin execution not covered by lifecycle configuration: org.kie:kie-maven-plugin:xxx.Final:build 
+			(execution: default-build, phase: compile) -->
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-source-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>jar-no-fork</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.kie</groupId>
+										<artifactId>kie-maven-plugin</artifactId>
+										<versionRange>[6.0.0,)</versionRange>
+										<goals>
+											<goal>build</goal>
+											<goal>compile</goal>
+											<goal>injectreactive</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>
